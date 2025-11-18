@@ -1,0 +1,82 @@
+import React, { useState } from 'react'
+import Header from '../component/Header'
+import { ImProfile } from "react-icons/im";
+import { MdPlace } from "react-icons/md";
+import Appointment from '../component/Appointment';
+
+const Dashboard = () => {
+  const [isActive, setIsActive] = useState("Profile");
+
+  const setActive = (e) => {
+    setIsActive(e.target.title)
+  }
+
+  const Labels = [
+    {id: 1,name: "Profile", icon: ImProfile},
+    {id: 2,name: "Appointments", icon: MdPlace},
+  ]
+  
+  const decoyAppointments = [
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+  ]
+
+  return <>
+    <Header/>
+    <div className='flex justify-around h-screen items-center mx-4 gap-5'>
+      <div className='h-[75%] w-full'>
+        {isActive === "Profile" && (
+          <div className='bg-white h-full w-full rounded-xl p-4 font-bold text-3xl'>
+           <div className='flex flex-col lg:flex-row justify-evenly items-center gap-8 px-4'>
+             <div className='flex flex-col sm:flex-row items-center gap-6'>
+               <div className='bg-blue-500 h-20 w-20 sm:h-28 sm:w-28 rounded-full flex items-center justify-center text-3xl sm:text-5xl flex-shrink-0'>F</div>
+               <div className='text-center sm:text-left'>
+                 <div className='text-4xl sm:text-5xl'>
+                   <span>First Name</span> <span>Last Name</span>
+                 </div>
+               </div>
+             </div>
+             <div className='text-center sm:text-left text-2xl sm:text-3xl space-y-3'>
+               <p>Number</p>
+               <p>Date of Birth</p>
+               <p>Password</p>
+             </div>
+           </div>
+          </div>
+        )}
+        {isActive === "Appointments" && (
+          <div className='bg-white h-full w-full rounded-xl p-4 text-3xl overflow-y-scroll'>
+          {decoyAppointments.map((app) => (
+            <Appointment
+            doctor={app.doctor}
+            title={app.title}
+            place={app.place}
+            date={app.date}
+            time={app.time}
+            key={Math.random()}
+            />
+          ))}
+          </div>
+        )}
+      </div>
+      <div className='text-3xl text-black bg-white rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex flex-col h-[75%]'>
+        {Labels.map((label) => 
+        <div onClick={setActive} title={label.name} key={Math.random()} className={`flex items-center gap-1 p-4 cursor-pointer ${label.id === 1 && " rounded-t-xl"} ${isActive === label.name && "bg-black text-white hover:none"}`}> <label.icon /> {label.name}</div>
+        )}
+      </div>
+    </div>
+  </>
+}
+
+export default Dashboard
