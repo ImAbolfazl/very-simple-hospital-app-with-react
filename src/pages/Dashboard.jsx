@@ -27,8 +27,6 @@ const Dashboard = () => {
   return <>
     <Header/>
     <div className='flex justify-around h-screen items-center mx-4 gap-5'>
-
-      {/* MAIN CONTENT */}
       <div className='h-[75%] w-full pb-20 md:pb-0'>
         {isActive === "Profile" && (
           <div className='bg-white h-full w-full rounded-xl p-4 font-bold text-3xl'>
@@ -65,8 +63,6 @@ const Dashboard = () => {
           </div>
         )}
       </div>
-
-      {/* DESKTOP SIDEBAR */}
       <div className='hidden md:flex text-3xl text-black bg-white rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex-col h-[75%]'>
         {Labels.map((label) => 
           <div 
@@ -79,8 +75,6 @@ const Dashboard = () => {
           </div>
         )}
       </div>
-
-      {/* MOBILE BOTTOM NAV */}
       <div className='md:hidden fixed bottom-0 left-0 right-0 bg-white h-16 shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex justify-around items-center'>
         {Labels.map((label) => (
           <div
