@@ -29,25 +29,42 @@ const Dashboard = () => {
     <div className='flex justify-around h-screen items-center mx-4 gap-5'>
       <div className='h-[75%] w-full pb-20 md:pb-0'>
         {isActive === "Profile" && (
-          <div className='bg-white h-full w-full rounded-xl p-4 font-bold text-3xl'>
-           <div className='flex flex-col lg:flex-row justify-evenly items-center gap-8 px-4'>
-             <div className='flex flex-col sm:flex-row items-center gap-6'>
-               <div className='bg-blue-500 h-20 w-20 sm:h-28 sm:w-28 rounded-full flex items-center justify-center text-3xl sm:text-5xl flex-shrink-0'>F</div>
-               <div className='text-center sm:text-left'>
-                 <div className='text-4xl sm:text-5xl'>
-                   <span>First Name</span> <span>Last Name</span>
-                 </div>
-               </div>
-             </div>
-             <div className='text-center sm:text-left text-2xl sm:text-3xl space-y-3'>
-               <p>Number</p>
-               <p>Date of Birth</p>
-               <p>Password</p>
-             </div>
-           </div>
+          <div className='bg-white h-full w-full rounded-xl p-6 font-bold text-3xl flex flex-col justify-center items-center'>
+
+            <div className='max-w-3xl w-full flex flex-col items-center gap-10'>
+              <div className='flex flex-col items-center gap-4'>
+                <div className='bg-blue-500 h-28 w-28 sm:h-32 sm:w-32 rounded-full flex items-center justify-center text-5xl text-white shadow-md'>
+                  F
+                </div>
+
+                <div className='text-center'>
+                  <p className='text-4xl sm:text-5xl font-bold'>
+                    First Name Last Name
+                  </p>
+                </div>
+              </div>
+              <div className='w-full bg-gray-100 rounded-xl p-6 shadow-inner text-2xl sm:text-3xl'>
+                <div className='flex flex-col gap-4'>
+                  <div className='flex justify-between'>
+                    <span className='text-gray-600'>Phone:</span>
+                    <span className='font-semibold'>Number</span>
+                  </div>
+                  
+                  <div className='flex justify-between'>
+                    <span className='text-gray-600'>Birth Date:</span>
+                    <span className='font-semibold'>Date of Birth</span>
+                  </div>
+
+                  <div className='flex justify-between'>
+                    <span className='text-gray-600'>Password:</span>
+                    <span className='font-semibold'>Password</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         )}
-
         {isActive === "Appointments" && (
           <div className='bg-white h-full w-full rounded-xl p-4 text-3xl overflow-y-scroll'>
             {decoyAppointments.map((app, index) => (
