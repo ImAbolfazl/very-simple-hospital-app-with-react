@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [isActive, setIsActive] = useState("Profile");
 
   const setActive = (e) => {
-    setIsActive(e.target.title)
+    setIsActive(e.currentTarget.title)
   }
 
   const Labels = [
@@ -17,25 +17,19 @@ const Dashboard = () => {
   ]
   
   const decoyAppointments = [
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
-    {doctor: "Dr. Abolfazl shomboli", title: "tarke khod erzayi", place: "bimarestan rezayi", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. test", title: "test title", place: "test place", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. test", title: "test title", place: "test place", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. test", title: "test title", place: "test place", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. test", title: "test title", place: "test place", date: "1404-09-02", time:"10:30"},
+    {doctor: "Dr. test", title: "test title", place: "test place", date: "1404-09-02", time:"10:30"},
   ]
 
   return <>
     <Header/>
     <div className='flex justify-around h-screen items-center mx-4 gap-5'>
-      <div className='h-[75%] w-full'>
+
+      {/* MAIN CONTENT */}
+      <div className='h-[75%] w-full pb-20 md:pb-0'>
         {isActive === "Profile" && (
           <div className='bg-white h-full w-full rounded-xl p-4 font-bold text-3xl'>
            <div className='flex flex-col lg:flex-row justify-evenly items-center gap-8 px-4'>
@@ -55,26 +49,52 @@ const Dashboard = () => {
            </div>
           </div>
         )}
+
         {isActive === "Appointments" && (
           <div className='bg-white h-full w-full rounded-xl p-4 text-3xl overflow-y-scroll'>
-          {decoyAppointments.map((app) => (
-            <Appointment
-            doctor={app.doctor}
-            title={app.title}
-            place={app.place}
-            date={app.date}
-            time={app.time}
-            key={Math.random()}
-            />
-          ))}
+            {decoyAppointments.map((app, index) => (
+              <Appointment
+                doctor={app.doctor}
+                title={app.title}
+                place={app.place}
+                date={app.date}
+                time={app.time}
+                key={index}
+              />
+            ))}
           </div>
         )}
       </div>
-      <div className='text-3xl text-black bg-white rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex flex-col h-[75%]'>
+
+      {/* DESKTOP SIDEBAR */}
+      <div className='hidden md:flex text-3xl text-black bg-white rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex-col h-[75%]'>
         {Labels.map((label) => 
-        <div onClick={setActive} title={label.name} key={Math.random()} className={`flex items-center gap-1 p-4 cursor-pointer ${label.id === 1 && " rounded-t-xl"} ${isActive === label.name && "bg-black text-white hover:none"}`}> <label.icon /> {label.name}</div>
+          <div 
+            onClick={setActive} 
+            title={label.name} 
+            key={label.id} 
+            className={`flex items-center gap-1 p-4 cursor-pointer ${label.id === 1 && "rounded-t-xl"} ${isActive === label.name && "bg-black text-white"}`}
+          > 
+            <label.icon /> {label.name}
+          </div>
         )}
       </div>
+
+      {/* MOBILE BOTTOM NAV */}
+      <div className='md:hidden fixed bottom-0 left-0 right-0 bg-white h-16 shadow-[0_8px_25px_rgba(0,0,0,0.18)] flex justify-around items-center'>
+        {Labels.map((label) => (
+          <div
+            key={label.id}
+            title={label.name}
+            onClick={setActive}
+            className={`flex flex-col items-center text-sm cursor-pointer ${isActive === label.name ? "text-blue-600" : "text-black"}`}
+          >
+            <label.icon size={22} />
+            <span>{label.name}</span>
+          </div>
+        ))}
+      </div>
+
     </div>
   </>
 }
